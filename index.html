@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجرم مطلوب - نظام المراقبة العالمي</title>
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #b3b3b3;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            cursor: none;
+            position: relative;
+        }
+        
+        /* تأثير الضبابية الداكنة حول الصفحة */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        /* تأثير الضوضاء الثابتة */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1001;
+        }
+        
+        /* المؤشر المخصص */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #ff1a1a;
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            animation: cursorPulse 1.5s infinite alternate;
+            box-shadow: 0 0 10px #ff1a1a, 0 0 20px #ff1a1a;
+        }
+        
+        @keyframes cursorPulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        /* تأثيرات الدم */
+        .blood-splatter {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 900;
+            opacity: 0.3;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,20 C40,10 60,10 80,20 C90,40 90,60 80,80 C60,90 40,90 20,80 C10,60 10,40 20,20 Z' fill='%238b0000'/%3E%3C/svg%3E"), 
+                             url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30,30 C50,20 70,20 90,30 C95,50 95,70 90,90 C70,95 50,95 30,90 C20,70 20,50 30,30 Z' fill='%238b0000'/%3E%3C/svg%3E");
+            background-size: 200px 200px, 150px 150px;
+            background-position: 10% 5%, 90% 80%;
+            background-repeat: no-repeat;
+        }
+        
+        .blood-drip {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            top: 0;
+            background: linear-gradient(to bottom, #8b0000 0%, transparent 100%);
+            animation: bloodDrip 5s infinite alternate;
+        }
+        
+        @keyframes bloodDrip {
+            0% { height: 20px; opacity: 0.5; }
+            100% { height: 30px; opacity: 0.8; }
+        }
+        
+        /* الخطوط */
+        @font-face {
+            font-family: 'HorrorFont';
+            src: url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+        }
+        
+        .glitch-text {
+            font-family: 'Courier New', monospace;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff1a1a;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 97px, 0); }
+            100% { clip: rect(38px, 9999px, 49px, 0); }
+        }
+        
+        /* النص الوامض */
+        .blink {
+            animation: blink 2s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* التألق النابض */
+        .pulse-glow {
+            animation: pulseGlow 2s infinite alternate;
+            text-shadow: 0 0 5px #ff1a1a, 0 0 10px #ff1a1a, 0 0 15px #ff1a1a;
+        }
+        
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 5px #ff1a1a, 0 0 10px #ff1a1a, 0 0 15px #ff1a1a; }
+            100% { text-shadow: 0 0 10px #ff1a1a, 0 0 20px #ff1a1a, 0 0 30px #ff1a1a, 0 0 40px #ff1a1a; }
+        }
+        
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* الرأس */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #8b0000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .title {
+            font-size: 4rem;
+            color: #8b0000;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 3px 3px 0 #000;
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, transparent, #8b0000, transparent);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b3b3b3;
+            letter-spacing: 3px;
+        }
+        
+        /* قسم التحذير */
+        .warning-section {
+            background-color: rgba(139, 0, 0, 0.2);
+            border: 2px solid #ff1a1a;
+            padding: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.5);
+            animation: borderFlash 3s infinite;
+        }
+        
+        @keyframes borderFlash {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 26, 26, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(255, 26, 26, 0.8); }
+        }
+        
+        .warning-banner {
+            background: #8b0000;
+            color: #000;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+        }
+        
+        .silhouette {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            filter: blur(10px);
+            z-index: -1;
+        }
+        
+        /* قسم الجرائم */
+        .crimes-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #ff1a1a;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #8b0000;
+            padding-bottom: 10px;
+        }
+        
+        .crime-list {
+            list-style-type: none;
+        }
+        
+        .crime-item {
+            background: rgba(139, 0, 0, 0.1);
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 3px solid #ff1a1a;
+            position: relative;
+        }
+        
+        .crime-item::before {
+            content: '>';
+            position: absolute;
+            left: 10px;
+            color: #ff1a1a;
+            font-weight: bold;
+        }
+        
+        /* قسم الصور */
+        .images-section {
+            margin-bottom: 40px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background: rgba(139, 0, 0, 0.2);
+            border: 2px solid #8b0000;
+            margin-bottom: 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+        }
+
+        .wanted-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #ff1a1a;
+            text-shadow: 2px 2px 0 #000;
+            z-index: 2;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border: 2px solid #ff1a1a;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: rgba(139, 0, 0, 0.2);
+            border: 1px solid #8b0000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(100%) hue-rotate(290deg) contrast(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .warning-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #ff1a1a;
+            border-radius: 50%;
+            opacity: 0.7;
+            z-index: 2;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            background: rgba(139, 0, 0, 0.2);
+            border: 1px solid #8b0000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .gallery-item::before {
+            content: 'WARNING';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff1a1a;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #000;
+            z-index: 1;
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #ff1a1a;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        /* النص الطرفي في الخلفية */
+        .terminal-text {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.1;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: #ff1a1a;
+            overflow: hidden;
+        }
+        
+        .terminal-line {
+            position: absolute;
+            white-space: nowrap;
+            animation: terminalMove 20s linear infinite;
+        }
+        
+        @keyframes terminalMove {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* التذييل */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #8b0000;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* تأثيرات إضافية من القسم الثاني */
+        
+        /* تأثير اهتزاز للصفحة */
+        @keyframes screenShake {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-2px, -2px); }
+            20% { transform: translate(2px, 2px); }
+            30% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            50% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            70% { transform: translate(-2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            90% { transform: translate(-2px, -2px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        .screen-shake {
+            animation: screenShake 0.5s infinite;
+        }
+        
+        /* تأثير تشويه للعناصر */
+        .distort {
+            animation: distort 3s infinite alternate;
+        }
+        
+        @keyframes distort {
+            0% { transform: skew(0deg, 0deg); }
+            100% { transform: skew(1deg, 1deg); }
+        }
+        
+        /* تأثير تلف الشاشة */
+        .screen-tear {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 49%, rgba(255, 26, 26, 0.1) 50%, transparent 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1002;
+            opacity: 0.1;
+            animation: screenTear 10s infinite linear;
+        }
+        
+        @keyframes screenTear {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        
+        /* تأثيرات دم إضافية */
+        .blood-stain {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(ellipse at center, rgba(139, 0, 0, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(5px);
+            z-index: 899;
+        }
+        
+        /* تأثيرات نصية متقطعة */
+        .flicker {
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0.3;
+            }
+        }
+        
+        /* تأثيرات حدود متوهجة */
+        .glowing-border {
+            position: relative;
+        }
+        
+        .glowing-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff1a1a, #8b0000, #ff1a1a, #8b0000);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: glowing 3s ease infinite;
+            border-radius: 4px;
+        }
+        
+        @keyframes glowing {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* تأثيرات الظل المتحرك */
+        .moving-shadow {
+            animation: movingShadow 5s infinite alternate;
+        }
+        
+        @keyframes movingShadow {
+            0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); }
+            100% { box-shadow: 10px 10px 20px rgba(255, 26, 26, 0.8); }
+        }
+        
+        /* تأثيرات النص المخفي الذي يظهر */
+        .hidden-text {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .reveal-trigger:hover + .hidden-text {
+            opacity: 1;
+        }
+        
+        /* تأثيرات الصور المتحركة */
+        .image-glitch {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-glitch::before,
+        .image-glitch::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            mix-blend-mode: difference;
+            opacity: 0;
+        }
+        
+        .image-glitch::before {
+            background: #ff1a1a;
+            animation: glitch-image-1 2s infinite linear alternate;
+        }
+        
+        .image-glitch::after {
+            background: #00ffff;
+            animation: glitch-image-2 3s infinite linear alternate;
+        }
+        
+        @keyframes glitch-image-1 {
+            0% { transform: translate(0); opacity: 0; }
+            10% { transform: translate(-5px, 5px); opacity: 0.1; }
+            20% { transform: translate(5px, -5px); opacity: 0.2; }
+            30% { transform: translate(-5px, -5px); opacity: 0.3; }
+            40% { transform: translate(5px, 5px); opacity: 0.2; }
+            50% { transform: translate(-5px, 5px); opacity: 0.1; }
+            60% { transform: translate(5px, -5px); opacity: 0.2; }
+            70% { transform: translate(-5px, -5px); opacity: 0.3; }
+            80% { transform: translate(5px, 5px); opacity: 0.2; }
+            90% { transform: translate(-5px, 5px); opacity: 0.1; }
+            100% { transform: translate(0); opacity: 0; }
+        }
+        
+        @keyframes glitch-image-2 {
+            0% { transform: translate(0); opacity: 0; }
+            10% { transform: translate(5px, -5px); opacity: 0.1; }
+            20% { transform: translate(-5px, 5px); opacity: 0.2; }
+            30% { transform: translate(5px, 5px); opacity: 0.3; }
+            40% { transform: translate(-5px, -5px); opacity: 0.2; }
+            50% { transform: translate(5px, -5px); opacity: 0.1; }
+            60% { transform: translate(-5px, 5px); opacity: 0.2; }
+            70% { transform: translate(5px, 5px); opacity: 0.3; }
+            80% { transform: translate(-5px, -5px); opacity: 0.2; }
+            90% { transform: translate(5px, -5px); opacity: 0.1; }
+            100% { transform: translate(0); opacity: 0; }
+        }
+        
+        /* تأثيرات صوتية مرئية */
+        .audio-wave {
+            position: relative;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .audio-wave::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #ff1a1a, transparent);
+            background-size: 200% 100%;
+            animation: audioWave 2s infinite linear;
+        }
+        
+        @keyframes audioWave {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* تأثيرات التنصت */
+        .wiretap {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #8b0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            z-index: 1003;
+            animation: wiretapPulse 2s infinite;
+            box-shadow: 0 0 10px #ff1a1a;
+        }
+        
+        @keyframes wiretapPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* تأثيرات التنبيه الخطيرة */
+        .danger-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #ff1a1a;
+            padding: 20px;
+            z-index: 2000;
+            text-align: center;
+            display: none;
+            box-shadow: 0 0 30px #ff1a1a;
+            animation: dangerAlert 0.5s infinite alternate;
+        }
+        
+        @keyframes dangerAlert {
+            0% { box-shadow: 0 0 30px #ff1a1a; }
+            100% { box-shadow: 0 0 50px #ff1a1a; }
+        }
+        
+        /* تأثيرات العد التنازلي */
+        .countdown {
+            font-size: 3rem;
+            color: #ff1a1a;
+            text-align: center;
+            margin: 20px 0;
+            animation: countdownPulse 1s infinite;
+        }
+        
+        @keyframes countdownPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- المؤشر المخصص -->
+    <div class="custom-cursor"></div>
+    
+    <!-- تأثيرات الدم -->
+    <div class="blood-splatter"></div>
+    <div class="blood-drip"></div>
+    
+    <!-- تأثيرات إضافية من القسم الثاني -->
+    <div class="screen-tear"></div>
+    
+    <!-- بقع دم عشوائية -->
+    <div class="blood-stain" style="top: 15%; left: 10%;"></div>
+    <div class="blood-stain" style="top: 70%; right: 5%; width: 100px; height: 100px;"></div>
+    <div class="blood-stain" style="top: 40%; left: 80%; width: 200px; height: 200px;"></div>
+    
+    <!-- جهاز التنصت -->
+    <div class="wiretap">REC</div>
+    
+    <!-- تنبيه خطير -->
+    <div class="danger-alert" id="dangerAlert">
+        <h2 class="pulse-glow">تحذير!</h2>
+        <p>تم اكتشاف موقعك. يرجى إغلاق هذه الصفحة فوراً.</p>
+        <div class="countdown" id="countdown">10</div>
+    </div>
+    
+    <!-- النص الطرفي في الخلفية -->
+    <div class="terminal-text">
+        <div class="terminal-line" style="top: 10%;">ACCESS OVERRIDE... SYSTEM BREACHED...</div>
+        <div class="terminal-line" style="top: 20%;">UNKNOWN SIGNAL DETECTED... TRACING...</div>
+        <div class="terminal-line" style="top: 30%;">ENCRYPTION BYPASSED... DATA LEAK...</div>
+        <div class="terminal-line" style="top: 40%;">WARNING: UNAUTHORIZED ACCESS...</div>
+        <div class="terminal-line" style="top: 50%;">SECURITY PROTOCOL FAILED...</div>
+        <div class="terminal-line" style="top: 60%;">DATA CORRUPTION DETECTED...</div>
+        <div class="terminal-line" style="top: 70%;">SYSTEM INTEGRITY COMPROMISED...</div>
+        <div class="terminal-line" style="top: 80%;">CONNECTION TERMINATED...</div>
+    </div>
+    
+    <div class="container">
+        <!-- الرأس -->
+        <header>
+            <h1 class="title glitch-text" data-text="مجرم خطير مطلوب">مجرم خطير مطلوب</h1>
+            <p class="subtitle blink">نظام المراقبة العالمي - القسم الجنائي</p>
+        </header>
+        
+        <!-- قسم التحذير -->
+        <section class="warning-section">
+            <div class="warning-banner pulse-glow">
+                <span class="glitch-text" data-text="SOUFIANE WLD LATIFA RECHERCHÉ">SOUFIANE WLD LATIFA RECHERCHÉ</span>
+            </div>
+            <div class="silhouette"></div>
+            <h2 class="section-title pulse-glow">Soufiane Tv</h2>
+            <p>مطلوب للعدالة مقابل 9999$</p>
+        </section>
+        
+        <!-- قسم الجرائم -->
+        <section class="crimes-section">
+            <h2 class="section-title pulse-glow">التهم والجرائم</h2>
+            <ul class="crime-list">
+                <li class="crime-item">تنظيم عصابة إجرامية في الابتزاز</li>
+                <li class="crime-item">عضو بارز في Ultras Askari التابعة لنادي الجيش الملكي</li>
+                <li class="crime-item">يقوم بتخريب وتشطيب tag ultras Winners و Greenboys و Eagles</li>
+                <li class="crime-item">بيع عطور مزورة تعرض حياة الزبناء لأمراض جلدية خطيرة</li>
+                <li class="crime-item">بيع ساعات يد مزورة بأثمنة باهظة</li>
+                <li class="crime-item">القيام باستمناء على الفتيات القاصرات أثناء بث مباشر على منصة تيك توك</li>
+            </ul>
+            
+            <h3 class="section-title pulse-glow" style="margin-top: 30px;">أخته Sabrine (القوادة)</h3>
+            <ul class="crime-list">
+                <li class="crime-item">تستدرج داعمين خليجيين وتغريهم بصور عارية</li>
+                <li class="crime-item">تمارس القوادة الإلكترونية</li>
+            </ul>
+        </section>
+        
+        <!-- قسم إضافي للمعلومات السرية -->
+        <section class="crimes-section">
+            <h2 class="section-title pulse-glow reveal-trigger" style="cursor: pointer;">معلومات سرية (مرر فوقي)</h2>
+            <div class="hidden-text">
+                <div class="crime-item">تم تعقب هوية Soufiane Tv عبر منصات التواصل الاجتماعي</div>
+                <div class="crime-item">يستخدم أسماء مستعارة متعددة للهروب من الملاحقة</div>
+                <div class="crime-item">لديه شركاء في عدة مدن مغربية</div>
+                <div class="crime-item">يتم تمويل عملياته عبر تحويلات مالية مشبوهة</div>
+                <div class="audio-wave"></div>
+                <p class="flicker" style="text-align: center; margin-top: 10px;">... جاري تحليل البيانات ...</p>
+            </div>
+        </section>
+        
+        <!-- قسم الصور -->
+        <section class="images-section">
+    <h2 class="section-title pulse-glow">الأدلة والمرئيات</h2>
+    
+    <!-- الصورة الرئيسية -->
+    <div class="main-image">
+        <img src="images/soufiane-main.jpg" alt="صورة Soufiane Tv الرئيسية">
+        <div class="wanted-text">مطلوب للعدالة 9999$</div>
+    </div>
+    
+    <!-- معرض الصور -->
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/evidence-1.jpg" alt="الدليل 1 - عطور مزورة">
+            <div class="warning-badge"></div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/evidence-2.jpg" alt="الدليل 2 - ساعات مزورة">
+            <div class="warning-badge"></div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/evidence-3.jpg" alt="الدليل 3 - نشاط Ultras">
+            <div class="warning-badge"></div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/evidence-4.jpg" alt="الدليل 4 - توثيق الجرائم">
+            <div class="warning-badge"></div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/evidence-5.jpg" alt="الدليل 5 - التوأم الشيطاني">
+            <div class="warning-badge"></div>
+        </div>
+    </div>
+</section>
+        
+        <!-- قسم إضافي للملاحقة -->
+        <section class="warning-section glowing-border">
+            <h2 class="section-title pulse-glow">معلومات الملاحقة</h2>
+            <div class="crime-item">آخر ظهور: حي أناسي، الدار البيضاء</div>
+            <div class="crime-item">يستخدم مركبة بيضاء بدون لوحات أرقام</div>
+            <div class="crime-item">يتنقل بين مقاهي الإنترنت لإخفاء عنوان IP</div>
+            <div class="crime-item">لديه تاريخ من التهديدات عبر الإنترنت</div>
+            <div class="crime-item flicker" style="text-align: center; margin-top: 15px; background: rgba(255, 26, 26, 0.2);">
+                مكافأة: 9999$ لمعلومات تؤدي إلى القبض عليه
+            </div>
+        </section>
+        
+        <!-- التذييل -->
+        <footer>
+            <p class="blink">تحذير: هذا الموقع حساس ومحمي. أي محاولة للوصول غير المصرح به ستتعقب.</p>
+            <p>© نظام المراقبة العالمي - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <script>
+        // تحريك المؤشر المخصص
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.querySelector('.custom-cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+        
+        // تأثيرات عشوائية للنص الطرفي
+        document.addEventListener('DOMContentLoaded', function() {
+            const terminalText = document.querySelector('.terminal-text');
+            const messages = [
+                "ACCESS OVERRIDE... SYSTEM BREACHED...",
+                "UNKNOWN SIGNAL DETECTED... TRACING...",
+                "ENCRYPTION BYPASSED... DATA LEAK...",
+                "WARNING: UNAUTHORIZED ACCESS...",
+                "SECURITY PROTOCOL FAILED...",
+                "DATA CORRUPTION DETECTED...",
+                "SYSTEM INTEGRITY COMPROMISED...",
+                "CONNECTION TERMINATED...",
+                "REROUTING... CONNECTION ESTABLISHED...",
+                "DATA STREAM INTERCEPTED... DECRYPTING..."
+            ];
+            
+            // إضافة أسطر طرفية عشوائية
+            for (let i = 0; i < 15; i++) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.textContent = messages[Math.floor(Math.random() * messages.length)];
+                line.style.top = Math.random() * 100 + '%';
+                line.style.animationDuration = (15 + Math.random() * 20) + 's';
+                line.style.animationDelay = (Math.random() * 10) + 's';
+                terminalText.appendChild(line);
+            }
+            
+            // تأثيرات الصفحة العشوائية
+            function triggerRandomEffects() {
+                const effects = [
+                    () => document.body.classList.add('screen-shake'),
+                    () => {
+                        const elements = document.querySelectorAll('.crime-item, .gallery-item');
+                        elements.forEach(el => el.classList.add('distort'));
+                    },
+                    () => {
+                        const alert = document.getElementById('dangerAlert');
+                        alert.style.display = 'block';
+                        startCountdown();
+                    }
+                ];
+                
+                // تشغيل تأثير عشوائي كل 20-40 ثانية
+                setTimeout(() => {
+                    const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+                    randomEffect();
+                    
+                    // إزالة التأثير بعد فترة
+                    setTimeout(() => {
+                        document.body.classList.remove('screen-shake');
+                        const elements = document.querySelectorAll('.crime-item, .gallery-item');
+                        elements.forEach(el => el.classList.remove('distort'));
+                    }, 3000);
+                    
+                    triggerRandomEffects();
+                }, 20000 + Math.random() * 20000);
+            }
+            
+            // بدء التأثيرات العشوائية
+            triggerRandomEffects();
+            
+            // إضافة بقع دم إضافية بشكل عشوائي
+            for (let i = 0; i < 5; i++) {
+                const stain = document.createElement('div');
+                stain.className = 'blood-stain';
+                stain.style.top = Math.random() * 100 + '%';
+                stain.style.left = Math.random() * 100 + '%';
+                stain.style.width = (50 + Math.random() * 100) + 'px';
+                stain.style.height = (50 + Math.random() * 100) + 'px';
+                stain.style.opacity = 0.2 + Math.random() * 0.3;
+                document.body.appendChild(stain);
+            }
+        });
+        
+        // بدء العد التنازلي
+        function startCountdown() {
+            let count = 10;
+            const countdownElement = document.getElementById('countdown');
+            const countdownInterval = setInterval(() => {
+                countdownElement.textContent = count;
+                count--;
+                
+                if (count < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('dangerAlert').style.display = 'none';
+                }
+            }, 1000);
+        }
+        
+        // تأثيرات النقر
+        document.addEventListener('click', function() {
+            // تأثير اهتزاز بسيط عند النقر
+            document.body.classList.add('screen-shake');
+            setTimeout(() => {
+                document.body.classList.remove('screen-shake');
+            }, 500);
+        });
+        
+        // تأثيرات تحريك الماوس
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // تأثيرات الظل المتتبع للماوس
+            const elements = document.querySelectorAll('.gallery-item, .crime-item');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const elX = rect.left + rect.width / 2;
+                const elY = rect.top + rect.height / 2;
+                
+                const distance = Math.sqrt(Math.pow(mouseX - elX, 2) + Math.pow(mouseY - elY, 2));
+                const maxDistance = 300;
+                
+                if (distance < maxDistance) {
+                    const intensity = 1 - (distance / maxDistance);
+                    el.style.boxShadow = `0 0 ${10 + intensity * 20}px rgba(255, 26, 26, ${0.3 + intensity * 0.5})`;
+                } else {
+                    el.style.boxShadow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
